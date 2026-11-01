@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>E-portfolio · Léo Lebrun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--ink:#111827;--muted:#6b7280;--line:#e8eaee;--soft:#f5f6f8;--accent:#1d3fbb;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scrollbar-width:thin;scrollbar-color:#c4c8d0 transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment{display:none;width:0;height:0;background:transparent}
+::-webkit-scrollbar-thumb{background:#c4c8d0;border:3px solid var(--bg);border-radius:999px}
+::-webkit-scrollbar-thumb:hover{background:#9299a5}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+main{opacity:1;transform:translateY(0);transition:opacity .24s cubic-bezier(.22,.8,.25,1),transform .24s cubic-bezier(.22,.8,.25,1)}
+body.lang-changing main{opacity:.3;transform:translateY(2px)}
+@media(prefers-reduced-motion:reduce){main{transition:none}}
+::selection{background:rgba(170,190,255,.38);color:inherit}
+::-moz-selection{background:rgba(170,190,255,.38);color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:980px;margin:0 auto;padding:0 28px}
+header{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{position:relative;display:flex;align-items:center;gap:14px;min-height:60px}
+.brand{font-weight:600;text-decoration:none;font-size:15.5px;white-space:nowrap;flex:none;transition:color .25s ease}
+.brand.on{color:var(--ink)}
+.links{display:flex;gap:clamp(7px,.8vw,10px);flex:1 1 auto;min-width:0;overflow:visible;scrollbar-width:none;position:relative;align-self:stretch;align-items:center;flex-wrap:nowrap;opacity:1;visibility:visible;transform:translateY(0);max-height:120px;transition:opacity .3s ease,transform .42s cubic-bezier(.16,1,.3,1),max-height .36s ease,flex-basis .36s ease,width .36s ease,padding .25s ease,visibility .3s ease}
+.links a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:14px;line-height:1.35;padding:2px 0;position:relative;transition:color .25s ease;flex:none}
+.links a:hover{color:var(--ink)}
+.links a.on{color:var(--ink)}
+.nav-indicator{position:absolute;top:0;left:0;height:1px;width:0;background:#4b5563;border-radius:999px;transform:translate3d(0,0,0);transition:transform .52s cubic-bezier(.16,1,.3,1),width .52s cubic-bezier(.16,1,.3,1);pointer-events:none;will-change:transform,width}
+@media(prefers-reduced-motion:reduce){.links,.links a,.nav-indicator{transition:none}}
+.lang{display:flex;gap:2px}
+.lang button{border:0;background:none;color:var(--muted);font:500 12px "Instrument Sans",sans-serif;padding:5px 7px;border-radius:6px;cursor:pointer;transition:background .2s,color .2s}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--soft);color:var(--ink)}
+section{padding:96px 0 0}
+#accueil{min-height:calc(100vh - 61px);min-height:calc(100svh - 61px);padding:0;display:flex;flex-direction:column;justify-content:center}
+.row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 48px}
+h1{font-size:clamp(44px,8vw,80px);line-height:1.04;letter-spacing:-.03em;font-weight:600;margin:0 0 10px;max-width:none}
+.portfolio-label{font-size:13px;letter-spacing:.22em;font-weight:500;color:var(--muted);margin:0 0 30px}
+h2{font-size:22px;line-height:1.3;font-weight:600;margin:0;padding-top:2px}
+h3{font-size:17px;margin:0;font-weight:600}
+.lead{font-size:21px;line-height:1.55;color:var(--muted);max-width:52ch;margin:0 0 32px}
+.intro{color:var(--muted);margin:0 0 28px;max-width:56ch}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 20px;border-radius:8px;border:1px solid var(--line);text-decoration:none;font-weight:500;font-size:15px;transition:background .2s,border-color .2s,box-shadow .2s}
+.btn:hover{background:var(--soft);box-shadow:0 6px 16px rgba(17,24,39,.08)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.primary{box-shadow:0 0 0 rgba(17,24,39,0);transition:background .2s,border-color .2s,box-shadow .2s}
+.btn.cv-fr:hover{background:#fff;border-color:var(--line);box-shadow:none}
+.tags{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:15px;display:flex;gap:6px 28px;flex-wrap:wrap}
+.item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 24px;padding:18px 0;border-top:1px solid var(--line)}
+.item:last-child{border-bottom:1px solid var(--line)}
+.item .k{color:var(--muted);font-size:14.5px;padding-top:2px}
+.item p{margin:2px 0 0;color:var(--muted);font-size:16px}
+.sub{font-size:14.5px;color:var(--muted);margin:32px 0 10px}
+.sub:first-child{margin-top:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{padding:3px 12px;border:1px solid var(--line);border-radius:999px;font-size:14.5px}
+.video-card{width:100%;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;transition:none}
+.video-card:hover{border-color:transparent;box-shadow:none}
+.video-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 11px}
+.video-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:10.5px;line-height:1.4;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.video-mark{width:6px;height:6px;border-radius:50%;background:#737b88;flex:none}
+.video-format{display:inline-flex;align-items:center;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:10.5px;line-height:1.2;letter-spacing:.02em;white-space:nowrap}
+.video-frame{overflow:visible;position:relative;aspect-ratio:auto;border-radius:0;background:transparent}
+.video-player{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#111318;border:0;border-radius:12px;object-fit:contain;accent-color:#111827;box-shadow:0 8px 24px rgba(17,24,39,.12)}
+.video-player:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(max-width:520px){.video-head{padding:0 0 9px}.video-kicker,.video-format{font-size:9.5px}.video-player{border-radius:999px;box-shadow:0 6px 18px rgba(17,24,39,.1)}}
+.note{font-size:14px;color:var(--muted);margin:12px 0 0}
+#accueil .home-social{margin-top:26px}
+.contact-links{display:flex;flex-wrap:wrap;align-items:center;gap:24px}
+.contact-link{display:inline-flex;align-items:center;gap:5px;min-height:0;padding:4px 0;border:0;border-radius:0;background:transparent;color:var(--muted);font:500 15px "Instrument Sans",sans-serif;text-align:left;text-decoration:none;cursor:pointer;box-shadow:none;transition:color .2s ease}
+.contact-link:hover{background:transparent;color:var(--ink);box-shadow:none}
+.contact-link:focus-visible{outline-offset:4px}
+.contact-link svg{width:20px;height:20px;flex:none;color:currentColor;opacity:.86}
+.email-rotator{display:inline-grid;grid-template-areas:"email";text-align:left;height:1.45em;line-height:1.45;overflow:hidden;vertical-align:middle}
+.email-label,.email-address{grid-area:email;white-space:nowrap;transition:transform .42s cubic-bezier(.22,.8,.25,1),opacity .28s ease}
+.email-label{transform:translateY(0);opacity:1}
+.email-address{transform:translateY(110%);opacity:0}
+.email-trigger.revealed .email-label{transform:translateY(-110%);opacity:0}
+.email-trigger.revealed .email-address{transform:translateY(0);opacity:1}
+.social-area{margin-top:0}
+.toast{min-height:20px;margin:8px 0 0;color:var(--muted);font-size:12.5px;opacity:0;transform:translateY(4px);transition:opacity .25s ease,transform .25s ease}
+.toast.show{opacity:1;transform:translateY(0)}
+footer{margin-top:120px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:14px}
+@media (max-width:900px){
+ .wrap{padding:0 20px}
+ .bar{display:flex;flex-wrap:wrap;gap:8px 12px;padding-top:8px;padding-bottom:8px}
+ .brand{order:1;font-size:15px}
+ .lang{order:2;margin-left:auto}
+ .links{order:3;flex:0 0 100%;width:100%;min-width:0;overflow:visible;flex-wrap:wrap;align-self:auto;align-items:center;gap:8px 16px;padding:3px 0 5px;max-height:100px}
+ .links a{font-size:13.5px}
+ .row{grid-template-columns:minmax(0,1fr)}
+ h2{margin-bottom:16px}
+ section{padding-top:72px}
+ #accueil{padding-top:0;padding-bottom:0;min-height:calc(100svh - 90px)}
+ .item{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:420px){
+ .links{gap:7px 12px}
+ .links a{font-size:13px}
+ .contact-links{gap:18px}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+ <a class="brand" href="#accueil">Léo Lebrun</a>
+ <nav class="links" id="links" aria-label="Navigation"></nav>
+ <div class="lang" role="group" aria-label="Langue / Language">
+  <button type="button" data-l="en" aria-pressed="true">EN</button>
+  <button type="button" data-l="fr" aria-pressed="false">FR</button>
+ </div>
+ <span class="nav-indicator" aria-hidden="true"></span>
+</div></header>
+
+<main class="wrap">
+<section id="accueil">
+ <h1>Léo Lebrun</h1>
+ <p class="portfolio-label">E-PORTFOLIO</p>
+ <p class="lead" data-i="h_lead"></p>
+ <div class="social-area home-social">
+  <div class="contact-links">
+   <button class="contact-link email-trigger" type="button" aria-label="Copy email address">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="email-rotator" aria-hidden="true"><span class="email-label">E-Mail</span><span class="email-address">leoartlebb@gmail.com</span></span>
+   </button>
+   <a class="contact-link linkedin-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.4h2.67ZM7 8.23a1.55 1.55 0 1 1 .02-3.1 1.55 1.55 0 0 1-.02 3.1ZM18.34 18h-2.67v-4.18c0-1-.02-2.29-1.4-2.29s-1.61 1.1-1.61 2.22V18H10V9.4h2.56v1.17h.04a2.8 2.8 0 0 1 2.52-1.39c2.7 0 3.2 1.78 3.2 4.1Z"/></svg>
+    <span>LinkedIn</span>
+   </a>
+  </div>
+  <p class="toast" role="status" aria-live="polite"></p>
+ </div>
+</section>
+
+<section id="cv"><div class="row">
+ <h2 data-i="cv_t"></h2>
+ <div><div class="btns">
+  <a class="btn primary" href="CV-Leo-Lebrun-EN.pdf" download data-i="cv_en"></a>
+  <a class="btn cv-fr" href="CV-Leo-Lebrun-FR.pdf" download data-i="cv_fr"></a>
+ </div></div>
+</div></section>
+
+<section id="pitch"><div class="row">
+ <h2 data-i="pv_t"></h2>
+ <div>
+  <p class="intro" data-i="pv_p"></p>
+  <div class="video-card">
+   <div class="video-frame">
+    <video class="video-player" controls playsinline preload="metadata" aria-label="Video pitch">
+     <source src="video-pitch.mp4" type="video/mp4">
+     Your browser does not support HTML5 video.
+    </video>
+   </div>
+  </div>
+ </div>
+</div></section>
+
+<section id="etudes"><div class="row">
+ <h2 data-i="st_t"></h2>
+ <div><p class="intro" data-i="st_p"></p><div id="stList"></div></div>
+</div></section>
+
+<section id="international"><div class="row">
+ <h2 data-i="in_t"></h2>
+ <div><p class="intro" data-i="in_p"></p><div id="inList"></div></div>
+</div></section>
+
+<section id="engagement"><div class="row">
+ <h2 data-i="cv2_t"></h2>
+ <div><p class="intro" data-i="cv2_p"></p><div id="ceList"></div></div>
+</div></section>
+
+<section id="sport"><div class="row">
+ <h2 data-i="sp_t"></h2>
+ <div><p class="intro" data-i="sp_p"></p><div id="spList"></div></div>
+</div></section>
+
+<section id="carriere"><div class="row">
+ <h2 data-i="ca_t"></h2>
+ <div>
+  <p class="intro" data-i="ca_p"></p>
+  <div class="sub" data-i="ca_goal"></div><div id="caGoal"></div>
+  <div class="sub" data-i="ca_next"></div><div id="caNext"></div>
+ </div>
+</div></section>
+
+<section id="contact"><div class="row">
+ <h2 data-i="co_t"></h2>
+ <div>
+  <p class="intro" data-i="co_p"></p>
+  <div class="social-area">
+   <div class="contact-links">
+    <button class="contact-link email-trigger" type="button" aria-label="Copy email address">
+     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+     <span class="email-rotator" aria-hidden="true"><span class="email-label">E-Mail</span><span class="email-address">leoartlebb@gmail.com</span></span>
+    </button>
+    <a class="contact-link linkedin-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.4h2.67ZM7 8.23a1.55 1.55 0 1 1 .02-3.1 1.55 1.55 0 0 1-.02 3.1ZM18.34 18h-2.67v-4.18c0-1-.02-2.29-1.4-2.29s-1.61 1.1-1.61 2.22V18H10V9.4h2.56v1.17h.04a2.8 2.8 0 0 1 2.52-1.39c2.7 0 3.2 1.78 3.2 4.1Z"/></svg>
+     <span>LinkedIn</span>
+    </a>
+   </div>
+   <p class="toast" role="status" aria-live="polite"></p>
+  </div>
+ </div>
+</div></section>
+
+<footer data-i="foot"></footer>
+</main>
+
+<script>
+(function(){
+var NAV=[["cv",["CV","Resume"]],["pitch",["Pitch vidéo","Video pitch"]],["etudes",["Études","Education"]],["international",["International","International"]],["engagement",["Engagement","Engagement"]],["sport",["Loisirs","Hobbies"]],["carriere",["Carrière","Career"]],["contact",["Contact","Contact"]]];
+var S={
+h_lead:["Étudiant ingénieur en sciences du numérique à l'ENSEEIHT.","Engineering student in digital sciences at ENSEEIHT."],
+cv_t:["Curriculum vitae","Curriculum vitae"],cv_fr:["Télécharger le CV en français (PDF)","Download CV in French (PDF)"],cv_en:["Télécharger le CV en anglais (PDF)","Download CV in English (PDF)"],
+pv_t:["Pitch vidéo","Video pitch"],pv_tag:["PRÉSENTATION VIDÉO","VIDEO PITCH"],pv_p:["Un courte vidéo de présentation sur mon parcours, ma motivation et ce que je cherche professionnellement.","A short introductory video covering my background, my motivation, and what I am looking for professionally."],
+pv_ph:["Présentation vidéo à venir","Video presentation coming soon"],
+pv_n:["",""],
+st_t:["Parcours d'études","Academic path"],st_p:["Les étapes qui ont construit ma formation scientifique.","The steps that shaped my scientific education."],
+in_t:["Mobilité internationale","International mobility"],in_p:["Échanges que je souhaiterais effectuer au cours de mes études d’ingénieur","Exchanges I would like to undertake during my engineering studies"],
+cv2_t:["Engagement civique","Civic engagement"],cv2_p:["Activités civiques auxquelles j’ai participé","Civic activities in which I have participated"],
+sp_t:["Loisirs","Hobbies"],sp_p:["Ce que je pratique en dehors des cours, et ce que cela développe chez moi.","What I do outside class, and the skills it builds."],
+ca_t:["Career development","Career development"],ca_p:["Mon projet professionnel, les compétences que je construis et mes prochaines étapes.","My career goals, the skills I'm building and my next steps."],
+ca_goal:["Projet professionnel","Career goals"],ca_next:["Prochaines étapes","Next steps"],
+co_t:["Contact","Contact"],co_p:["N’hésitez pas à me contacter.","Feel free to get in touch."],
+foot:["2026 Léo Lebrun · E-portfolio","2026 Léo Lebrun · E-portfolio"]
+};
+var D={
+tags:[["Mathématiques","Mathematics"],["Physique","Physics"],["Informatique","Computer science"],["Concours des grandes écoles","Engineering school entrance exams"]],
+cvExp:[[["Été 2025","Summer 2025"],["Expérience professionnelle","Professional experience"],["",""]]],
+cvSk:[["Python","Python"],["OCaml","OCaml"],["JavaScript","JavaScript"],["LaTeX","LaTeX"],["Analyse et algèbre","Analysis & algebra"],["Probabilités","Probability"]],
+cvLg:[["Français – natif","French – native"],["Anglais","English"]],
+stList:[[["2026 - Aujourd'hui","2026 - Today"],["ENSEEIHT - Informatique et télécommunications","ENSEEIHT - Computer science and telecommunications"],["École d'ingénieurs","Engineering school"]],[["2024 - 2026","2024 – 2026"],["CPGE MPSI/MP Descartes","Descartes preparatory class MPSI/MP"],["Deux ans de formation scientifique intensive en mathématiques et en physique","Two years of intensive scientific training in mathematics and physics"]],[["2021 - 2024","2021 - 2024"],["Lycée Balzac","Balzac High School"],["Baccalauréat mention très bien, spécialité mathématiques et physique","Baccalaureate with highest honors, specializing in mathematics and physics"]]],
+inList:[[["Chine","China"],["Université Sun Yat-Sen","Sun Yat-Sen University"],["Un séjour d’échange pour étudier les mathématiques appliquées et l’informatique, découvrir la culture chinoise et mettre en pratique ma LV2","An exchange to study applied mathematics and computer science, discover Chinese culture, and put my second foreign language to use."]],[["Chine","China"],["Université des sciences et technologies de Huazhong","Huazhong University of Science and Technology"],["Un autre échange chinois pour découvrir la culture, pratiquer ma LV2 et étudier l'informatique","Another exchange in China to discover the culture, practice my second language, and study computer science"]],[["Australie","Australia"],["Université de technologie du Queensland","Queensland University of Technology"],["Un échange pour mettre en pratique mon anglais et étudier l'informatique dans un environnement internationnal","An exchange to put my English into practice and study computer science in an international environment"]],[["Canada","Canada"],["École Polytechnique de Montréal","Polytechnique Montréal"],["Un échange pour étudier les mathématiques appliquées et l'informatique ","An exchange to study applied mathematics and computer science"]]],
+ceList:[[["Droit et sensibilisation en matière de violences sexuelles et fondées sur le genre","Law and awareness regarding sexual and gender-based violence"],["Le procès de King Kong","The Trial of King Kong"],["Le Procès de King Kong est une pièce interactive mettant en scène trois affaires jouées par des acteurs et interrogées par un juge, afin de sensibiliser le public aux violences sexistes et sexuelles ainsi qu'au bizutage.","The King Kong Trial is an interactive play featuring three cases, enacted by actors and examined by a judge, designed to raise public awareness about gender-based and sexual violence, as well as hazing."]],[["Écologie et climat","Ecology and climate"],["La Fresque du Climat","Climate Fresk"],["La Fresque du Climat est un atelier collaboratif en petits groupes visant à identifier, catégoriser et relier les causes et conséquences des activités humaines dans une fresque afin de comprendre les mécanismes du changement climatique et leurs impacts sur l'environnement.","The Climate Fresk is a collaborative, small-group workshop that involves identifying, categorizing, and connecting the causes and consequences of human activities to create a visual map designed to help participants understand the mechanisms of climate change and its impacts on the environment."]]],
+spList:[[["Audio-visuel","Audio-visual"],["TVn7","TVn7"],["Montage, écriture de scénarios, tournage et production dans le cadre d’une association étudiante à l’ENSEEIHT, axés sur la création de courts-métrages ou la prestation de services professionnels.","Editing, screenwriting, filming, and production within the student association framework at ENSEEIHT, focused on creating short films or delivering professional services."]],[["Informatique et machine learning","Computer science and machine learning"],["Kaggle","Kaggle"],["Kaggle est une plateforme d'apprentissage et de compétition en data science et machine learning.","Kaggle is a platform for learning and competition in data science and machine learning."]]],
+caGoal:[[["Cap","Direction"],["Ingénierie en informatique et mathématiques appliquées","Engineering in computer science and applied mathematics"],["",""]]],
+caNext:[[["Court terme","Short term"],["Trouver le domaine qui me correspond","Finding the field that suits me"],["Je souhaite travailler dans l'informatique dans les domaines de l'aérospatial, de l'IA, des télécomminications ou encore du médicale","I would like to work in the field of IT, specifically within sectors such as aerospace, AI, telecommunications, or the medical field."]],[["Moyen terme","Mid term"],["Stage et mobilité","Internship and mobility"],["Développer une première expérience professionnelle.","Build initial professional experience."]],[["Long terme","Long term"],["Rejoindre une entreprise","Joining a company"],["Construire un parcours professionnel dans l’ingénierie.","Build a career in engineering."]]]
+};
+
+/* URLs LinkedIn selon la langue (modifiez les liens ci-dessous avec vos vraies URLs) */
+var linkedinLinks = {
+  fr: "https://www.linkedin.com/in/l%C3%A9o-lebrun-24bba734a/",
+  en: "https://www.linkedin.com/in/l%C3%A9o-lebrun-24bba734a/?locale=en-US"
+};
+
+var lang="en";
+var L=function(p){return p[lang==="fr"?0:1]};
+function pills(id,a){document.getElementById(id).innerHTML=a.map(function(x){return'<span class="pill">'+L(x)+'</span>'}).join("")}
+function items(id,a){document.getElementById(id).innerHTML=a.map(function(x){return'<div class="item"><div class="k">'+L(x[0])+'</div><div><h3>'+L(x[1])+'</h3><p>'+L(x[2])+'</p></div></div>'}).join("")}
+var cur="brand";
+var languageTransition=false,languageChangeTimer=null,pendingLanguage=lang;
+var isManualScrolling=false, manualScrollTimer=null;
+var navElement=document.getElementById("links");
+var barElement=document.querySelector(".bar");
+var brandElement=document.querySelector(".brand");
+
+function buildNav(){
+ navElement.innerHTML=NAV.map(function(n){return'<a href="#'+n[0]+'" data-s="'+n[0]+'">'+L(n[1])+'</a>'}).join("");
+}
+
+function moveIndicator(){
+ var indicator=barElement.querySelector(".nav-indicator");
+ var active=(cur==="brand")?brandElement:navElement.querySelector('a[data-s="'+cur+'"]');
+ if(!active||!indicator)return;
+ var barRect=barElement.getBoundingClientRect();
+ var targetRect=active.getBoundingClientRect();
+ indicator.style.width=targetRect.width+"px";
+ indicator.style.top=(targetRect.bottom-barRect.top+2)+"px";
+ indicator.style.transform="translate3d("+(targetRect.left-barRect.left)+"px,0,0)";
+}
+
+function spy(id){
+ if(id==="accueil"||id==="brand"){cur="brand";}
+ else if(NAV.some(function(n){return n[0]===id})){cur=id;}
+ else{return;}
+ brandElement.classList.toggle("on",cur==="brand");
+ if(cur==="brand")brandElement.setAttribute("aria-current","location");else brandElement.removeAttribute("aria-current");
+ navElement.querySelectorAll("a[data-s]").forEach(function(a){var active=a.dataset.s===cur;a.classList.toggle("on",active);if(active)a.setAttribute("aria-current","location");else a.removeAttribute("aria-current")});
+ moveIndicator();
+}
+
+function render(){
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=L(S[e.dataset.i])});
+ if(!navElement.querySelector("a[data-s]"))buildNav();
+ NAV.forEach(function(n){var a=navElement.querySelector('a[data-s="'+n[0]+'"]');if(a&&a.textContent!==L(n[1]))a.textContent=L(n[1])});
+ ["stList","inList","ceList","spList","caGoal","caNext"].forEach(function(k){items(k,D[k])});
+ document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.l===lang))});
+ 
+ /* Mise à jour dynamique des liens LinkedIn en fonction de la langue */
+ document.querySelectorAll(".linkedin-link").forEach(function(link){
+  link.href = linkedinLinks[lang] || linkedinLinks["en"];
+ });
+
+ spy(cur);
+}
+
+function changeLanguage(next){
+ if(next===lang&&!languageTransition)return;
+ pendingLanguage=next;
+ languageTransition=true;
+ document.body.classList.add("lang-changing");
+ clearTimeout(languageChangeTimer);
+ languageChangeTimer=setTimeout(function(){
+  lang=pendingLanguage;
+  render();
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+   moveIndicator();
+   document.body.classList.remove("lang-changing");
+   setTimeout(function(){languageTransition=false;},360);
+  })});
+ },130);
+}
+
+document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){changeLanguage(b.dataset.l)})});
+
+navElement.addEventListener("click",function(event){
+ var a=event.target.closest("a[data-s]");
+ if(a){
+  isManualScrolling=true;
+  spy(a.dataset.s);
+  clearTimeout(manualScrollTimer);
+  manualScrollTimer=setTimeout(function(){
+   isManualScrolling=false;
+  }, 800);
+ }
+});
+
+brandElement.addEventListener("click",function(){
+ isManualScrolling=true;
+ spy("brand");
+ clearTimeout(manualScrollTimer);
+ manualScrollTimer=setTimeout(function(){
+  isManualScrolling=false;
+ }, 800);
+});
+
+var io=new IntersectionObserver(function(es){
+ if(languageTransition || isManualScrolling) return;
+ es.forEach(function(e){if(e.isIntersecting)spy(e.target.id)});
+},{rootMargin:"-30% 0px -60% 0px"});
+
+document.querySelectorAll("main section").forEach(function(s){io.observe(s)});
+
+document.querySelectorAll(".email-trigger").forEach(function(emailButton){
+ var toast=emailButton.closest(".social-area").querySelector(".toast"),toastTimer;
+ emailButton.addEventListener("click",function(){
+  var email="leoartlebb@gmail.com";
+  emailButton.classList.add("revealed");
+  var copyPromise;
+  if(navigator.clipboard&&navigator.clipboard.writeText){copyPromise=navigator.clipboard.writeText(email)}
+  else{copyPromise=new Promise(function(resolve,reject){try{var ta=document.createElement("textarea");ta.value=email;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=document.execCommand("copy");ta.remove();ok?resolve():reject()}catch(e){reject(e)}})}
+  Promise.resolve(copyPromise).then(function(){toast.textContent=lang==="fr"?"Adresse e-mail copiée dans le presse-papiers.":"Email address copied to clipboard.";toast.classList.add("show")}).catch(function(){toast.textContent=lang==="fr"?"Adresse e-mail : leoartlebb@gmail.com":"Email address: leoartlebb@gmail.com";toast.classList.add("show")});
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){toast.classList.remove("show")},2800);
+ });
+});
+
+function revealNavigation(){
+ if(window.scrollY<=2 && !isManualScrolling)spy("brand");
+}
+window.addEventListener("scroll",revealNavigation,{passive:true});
+window.addEventListener("resize",moveIndicator);
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(moveIndicator)}
+render();
+revealNavigation();
+})();
+</script>
+</body>
+</html>
